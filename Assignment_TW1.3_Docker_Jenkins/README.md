@@ -53,7 +53,7 @@ docker ps
 
 #### Building Docker Image
 
-![Docker Build](screenshots\docker_building_docker_images.png)
+![Docker Build](screenshots/docker_building_docker_images.png)
 
 #### Docker Images
 
@@ -73,7 +73,7 @@ docker ps
 
 #### Stopping and Removing Docker Container
 
-![Stop Docker](screenshots\stopping_removing_docker_image.png)
+![Stop Docker](screenshots/stopping_removing_docker_image.png)
 
 ---
 
