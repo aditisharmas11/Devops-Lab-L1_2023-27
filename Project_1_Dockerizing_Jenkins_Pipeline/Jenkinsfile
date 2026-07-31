@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t hello-flask ./Assignment_TW1.1_Git_Workflow/hello-flask'
+            }
+        }
+
+        stage('List Images') {
+            steps {
+                bat 'docker images'
+            }
+        }
+    }
+}
