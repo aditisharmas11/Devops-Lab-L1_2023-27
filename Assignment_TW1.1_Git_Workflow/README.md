@@ -40,7 +40,7 @@ git push origin main
 
 #### Creating Virtual Environment & Installing Flask
 
-![Virtual Environment](screenshots\creating_venv_&_install_flask.png)
+![Virtual Environment](screenshots\creating_venv_install_flask.png)
 
 #### Running Flask Application
 
