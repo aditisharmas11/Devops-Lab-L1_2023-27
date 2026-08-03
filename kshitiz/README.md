@@ -1,8 +1,8 @@
 # DevOps Lab Assignments
 
-**Name:** Omika Shrestha
+**Name:** Kshitij shah
 
-**PRN:** 23070122245
+**PRN:** 23070122121
 
 **Course:** DevOps Lab
 
