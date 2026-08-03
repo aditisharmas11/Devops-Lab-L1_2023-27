@@ -1,7 +1,7 @@
 # TW1.1 - Git Workflow & Collaboration
 
-**Name:** Omkar Kadam  
-**PRN:** 23070122158  
+**Name:** Kshitij shah 
+**PRN:** 23070122121  
 
 ---
 
