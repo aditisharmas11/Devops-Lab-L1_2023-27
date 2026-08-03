@@ -1,7 +1,7 @@
 # TW1.2 - Jira Project & Issue Tracking
 
-**Name:** Omkar Kadam  
-**PRN:** 23070122158  
+**Name:** Kshitij shah
+**PRN:** 23070122121  
 
 ---
 
