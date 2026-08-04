@@ -1,0 +1,47 @@
+pipeline {
+    agent none
+
+    stages {
+
+        stage('Checkout') {
+            agent { label 'agent1' }
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            agent { label 'agent1' }
+            steps {
+                dir('Project_4_Distributed_Jenkins_Pipeline/portfolio') {
+                    bat 'mvn clean compile'
+                }
+            }
+        }
+
+        stage('Test') {
+            agent { label 'agent2' }
+            steps {
+                dir('Project_4_Distributed_Jenkins_Pipeline/portfolio') {
+                    bat 'mvn test'
+                }
+            }
+        }
+
+        stage('Package') {
+            agent { label 'agent2' }
+            steps {
+                dir('Project_4_Distributed_Jenkins_Pipeline/portfolio') {
+                    bat 'mvn package'
+                }
+            }
+        }
+
+        stage('Archive Artifact') {
+            agent { label 'agent2' }
+            steps {
+                archiveArtifacts artifacts: 'Project_4_Distributed_Jenkins_Pipeline/portfolio/target/*.jar'
+            }
+        }
+    }
+}
