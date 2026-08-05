@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/jhadiksha65/HelloWorldFlask_TW1.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat '"C:\\Users\\Dell\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t helloworldflask_tw1-flask-app .'
+            }
+        }
+
+        stage('Success') {
+            steps {
+                echo 'Docker Image Built Successfully!'
+            }
+        }
+    }
+}
