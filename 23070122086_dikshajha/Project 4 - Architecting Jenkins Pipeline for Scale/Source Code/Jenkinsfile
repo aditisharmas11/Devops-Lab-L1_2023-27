@@ -1,0 +1,42 @@
+pipeline {
+    agent none
+
+    stages {
+
+        stage('Compile') {
+            agent {
+                label 'compile'
+            }
+            steps {
+                dir('C:/Users/Dell/Desktop/jenkins-maven-demo') {
+                    bat 'mvn clean compile'
+                }
+            }
+        }
+
+        stage('Test') {
+            agent {
+                label 'test'
+            }
+            steps {
+                dir('C:/Users/Dell/Desktop/jenkins-maven-demo') {
+                    bat 'mvn test'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+
+        success {
+            echo 'Build Successful!'
+        }
+
+        failure {
+            echo 'Build Failed!'
+        }
+    }
+}
