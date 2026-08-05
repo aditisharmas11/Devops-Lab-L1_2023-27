@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build: .
+    container_name: angular-docker-app
+    ports:
+      - "4200:80"
