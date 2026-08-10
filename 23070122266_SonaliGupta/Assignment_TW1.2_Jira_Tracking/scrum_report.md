@@ -1,1 +1,0 @@
-# Scrum & Jira Workflow Report
