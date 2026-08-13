@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: social-media-service
+  labels:
+    app: social-media-app
+spec:
+  selector:
+    app: social-media-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+  type: ClusterIP
