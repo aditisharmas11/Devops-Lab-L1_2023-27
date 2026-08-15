@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: siddhantops-service
+  labels:
+    owner: ayush-siddhant
+    prn: "23070122066"
+spec:
+  selector:
+    app: siddhantops-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
