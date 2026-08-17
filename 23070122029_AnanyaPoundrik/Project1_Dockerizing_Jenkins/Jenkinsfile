@@ -3,15 +3,9 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t jenkins-flask-app ./source'
+                bat 'docker build -t jenkins-flask-app 23070122029_AnanyaPoundrik/Project1_Dockerizing_Jenkins/source'
             }
         }
 
