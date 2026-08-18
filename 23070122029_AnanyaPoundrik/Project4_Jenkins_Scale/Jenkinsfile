@@ -8,7 +8,8 @@ pipeline {
                 label 'maven-agent-1'
             }
             steps {
-                dir('maven-project') {
+                checkout scm
+                dir('23070122029_AnanyaPoundrik/Project4_Jenkins_Scale/maven-project') {
                     bat 'mvn clean compile'
                 }
             }
@@ -19,7 +20,8 @@ pipeline {
                 label 'maven-agent-2'
             }
             steps {
-                dir('maven-project') {
+                checkout scm
+                dir('23070122029_AnanyaPoundrik/Project4_Jenkins_Scale/maven-project') {
                     bat 'mvn test'
                 }
             }
