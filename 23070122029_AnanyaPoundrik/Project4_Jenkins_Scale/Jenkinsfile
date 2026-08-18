@@ -1,0 +1,28 @@
+pipeline {
+    agent none
+
+    stages {
+
+        stage('Compile on Agent 1') {
+            agent {
+                label 'maven-agent-1'
+            }
+            steps {
+                dir('maven-project') {
+                    bat 'mvn clean compile'
+                }
+            }
+        }
+
+        stage('Test on Agent 2') {
+            agent {
+                label 'maven-agent-2'
+            }
+            steps {
+                dir('maven-project') {
+                    bat 'mvn test'
+                }
+            }
+        }
+    }
+}
