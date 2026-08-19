@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: retail-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: retail-app
+  template:
+    metadata:
+      labels:
+        app: retail-app
+    spec:
+      containers:
+        - name: retail-app
+          image: dikas/retail-app:1.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "500m"
