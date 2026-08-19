@@ -89,11 +89,11 @@ Project_9_Apache2_Kubernetes/
 │   └── service.yaml                           # NodePort Service (Port 80 -> NodePort 30089)
 │
 ├── screenshots/
-│   ├── SCREENSHOTS_REQUIRED.md                # Verification checklist and evidence summary
-│   ├── P9_01_cluster_and_deployment.png       # Cluster node readiness and pod verification
-│   ├── P9_02_apache_service.png               # NodePort service and ConfigMap details
+│   ├
+│   ├
+│   ├── P9_01_apache_service.png               # NodePort service and ConfigMap details
 │   ├── P9_03_host_machine_access.png          # Windows host terminal curl verification
-│   └── P9_04_apache_logs.png                  # Apache runtime and access logs
+│   └── P9_02_apache_logs.png                  # Apache runtime and access logs
 │
 └── README.md                                  # Comprehensive documentation
 ```
@@ -294,7 +294,7 @@ Content-Type: text/html
 ...
 <h1>Apache2 Kubernetes Server</h1>
 <p>Project 9 - DevOps Lab Submission</p>
-<div class="grid-value">Mohammad Ahmad (PNR: 23070122140)</div>
+<div class="grid-value">Ayaan Rukadikar (PNR: 23070122063)</div>
 ...
 </html>
 ```
@@ -307,18 +307,11 @@ Content-Type: text/html
 
 ---
 
-## 7. Verified Execution Screenshots
 
-| Screenshot | Description |
-| :--- | :--- |
-| ![Cluster & Deployment](./screenshots/P9_01_cluster_and_deployment.png) | **Figure 7.1:** Cluster node readiness (`Ready`), `apache-demo` namespace, and Apache2 pod in `Running` (1/1 Ready) state. |
-| ![Apache Service & ConfigMap](./screenshots/P9_02_apache_service.png) | **Figure 7.2:** `apache2-service` NodePort details (`80:30089/TCP`) and ConfigMap metadata. |
-| ![Host Machine Access](./screenshots/P9_03_host_machine_access.png) | **Figure 7.3:** Host PowerShell terminal executing `curl.exe` receiving `HTTP/1.1 200 OK` and custom HTML content. |
-| ![Apache Logs](./screenshots/P9_04_apache_logs.png) | **Figure 7.4:** Apache access logs recording the host machine HTTP request (`200 4874`). |
 
 ---
 
-## 8. Conclusion
+## 7. Conclusion
 
 **Project 9** successfully demonstrates the core workflows for orchestrating and managing Apache HTTP Server instances on Kubernetes:
 1. **Declarative Container Management:** Deployed standard `httpd:2.4-alpine` images seamlessly.
