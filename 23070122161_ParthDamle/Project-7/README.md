@@ -1,7 +1,7 @@
 # Project 7: MongoDB and Mongo Express Deployment on Kubernetes
 
-**Student Name:** Parth\
-**Project:** Project 7 --- MongoDB and Mongo Express on Kubernetes
+**Student Name:** Parth Damle\
+**PRN:** 23070122161
 
 ## Project Description
 
