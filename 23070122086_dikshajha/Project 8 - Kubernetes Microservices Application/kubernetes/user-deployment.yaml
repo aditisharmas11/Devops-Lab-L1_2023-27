@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project8-user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project8-user-service
+  template:
+    metadata:
+      labels:
+        app: project8-user-service
+    spec:
+      containers:
+        - name: user-service
+          image: project8-user-service:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: project8-config
+            - secretRef:
+                name: project8-secret

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project8-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project8-frontend
+  template:
+    metadata:
+      labels:
+        app: project8-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: project8-frontend:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: project8-config
+            - secretRef:
+                name: project8-secret

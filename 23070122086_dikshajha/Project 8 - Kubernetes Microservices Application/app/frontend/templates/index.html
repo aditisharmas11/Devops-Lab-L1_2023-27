@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kubernetes Microservices Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+            background: #f4f6f8;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Kubernetes Microservices Application</h1>
+
+<p class="subtitle">
+    Project 8 - DevOps Lab
+</p>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Users</h2>
+        <ul>
+            {% for user in users %}
+            <li>{{ user.name }} - ID: {{ user.id }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Products</h2>
+        <ul>
+            {% for product in products %}
+            <li>{{ product.name }} - Price: {{ product.price }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Orders</h2>
+        <ul>
+            {% for order in orders %}
+            <li>Order #{{ order.id }} - {{ order.product }} x {{ order.quantity }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+<div class="status">
+    Frontend successfully connected to User, Product and Order microservices
+</div>
+
+</body>
+</html>

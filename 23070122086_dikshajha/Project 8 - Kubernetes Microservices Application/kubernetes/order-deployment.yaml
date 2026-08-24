@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project8-order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project8-order-service
+  template:
+    metadata:
+      labels:
+        app: project8-order-service
+    spec:
+      containers:
+        - name: order-service
+          image: project8-order-service:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: project8-config
+            - secretRef:
+                name: project8-secret

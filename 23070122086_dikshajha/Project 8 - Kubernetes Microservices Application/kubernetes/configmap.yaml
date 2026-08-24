@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: project8-config
+data:
+  ENVIRONMENT: "minikube"
+  APPLICATION_NAME: "Kubernetes Microservices Application"
+  USER_SERVICE_URL: "http://project8-user-service:5000"
+  PRODUCT_SERVICE_URL: "http://project8-product-service:5000"
+  ORDER_SERVICE_URL: "http://project8-order-service:5000"
