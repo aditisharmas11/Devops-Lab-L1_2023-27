@@ -1,0 +1,15 @@
+services:
+  my-angular-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-angular-app:prod
+    container_name: my-angular-app-container
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
