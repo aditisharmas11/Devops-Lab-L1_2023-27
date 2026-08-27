@@ -1,0 +1,48 @@
+services:
+  jenkins:
+    build:
+      context: ../Project1-Dockerized-Jenkins-Pipeline
+      dockerfile: Dockerfile.jenkins
+    image: devops-lab-jenkins:lts
+    container_name: jenkins-master
+    user: "0:0"
+    hostname: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      PIP_BREAK_SYSTEM_PACKAGES: "1"
+      DOCKER_HOST: "unix:///var/run/docker.sock"
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Kolkata"
+      CASC_JENKINS_CONFIG: /var/jenkins_casc/jenkins.yaml
+    group_add:
+      - "0"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./jenkins/casc.yaml:/var/jenkins_casc/jenkins.yaml:ro
+      - ./jenkins/ssh/id_rsa:/run/secrets/agent_ssh_key:ro
+    restart: unless-stopped
+
+  slave-1:
+    build:
+      context: ./jenkins/agent
+    image: devops-lab-maven-agent:jdk17
+    container_name: jenkins-slave-1
+    hostname: slave-1
+    environment:
+      JENKINS_AGENT_SSH_PUBKEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCtU2/LuuVKdHryhf15ofpJX78/I2purwLaeNMzb6qNxVWPOHSqQJGEvpfC8bVijTfnirnbWqM9t36X2CghkBW7yCNw3bXHnMFkKP9eO+J7WmDbVOrdpVKjw3UgkAUtPIJ2uYLs7cZs6TDCGf6L80xGjrpx3JuZftVI60PT1dpLx/n7B/JEPSTj8ndqqNARuWPsBHV7KNYqrleGekP0TZVGQsGboO+HD0wxych+q1OgKBUOBkRdT/PSKwp63mzeJLOEr9ADvDMQX0kzVkg1H/JnuvnBqOjStbMz9/MhdkEi/OzObekieKX7MKrsIDrWCwEuW4kJKvi/v7YGjSyPVVgitRzCOa6MIBtyXwQvDLfk7IYauExHaQvL7m/QOO+0u6odFSQu9ba7YtKZuaJY+KEbOVGWhiFDw0UooEAx/GQf8nQzrZ8gH+P4q8u49qxXcm2Gnnjgq78ZhMGsmFEaoJvQC4MkfCvxapnb9L+eXeMdQNjfW+ijxJFKX2fQtfZfF4zBoHLA88OVVpvCul7deENGeZiZscUV5lDh50z/K3HQeiDcrD2/wQGK9lA8PBfvmHZd5tOzOCkF9YceXSRtMn65Y7iT9GFe3R/RSgut76pVnLwMpeWz3uiKmM+TNiUWlKrblJ86vyGcWLq/M1o66CzyXgAOse+rA57JeRlQFNJiUw== jenkins-agent-lab-key"
+    restart: unless-stopped
+
+  slave-2:
+    image: devops-lab-maven-agent:jdk17
+    container_name: jenkins-slave-2
+    hostname: slave-2
+    depends_on:
+      - slave-1
+    environment:
+      JENKINS_AGENT_SSH_PUBKEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCtU2/LuuVKdHryhf15ofpJX78/I2purwLaeNMzb6qNxVWPOHSqQJGEvpfC8bVijTfnirnbWqM9t36X2CghkBW7yCNw3bXHnMFkKP9eO+J7WmDbVOrdpVKjw3UgkAUtPIJ2uYLs7cZs6TDCGf6L80xGjrpx3JuZftVI60PT1dpLx/n7B/JEPSTj8ndqqNARuWPsBHV7KNYqrleGekP0TZVGQsGboO+HD0wxych+q1OgKBUOBkRdT/PSKwp63mzeJLOEr9ADvDMQX0kzVkg1H/JnuvnBqOjStbMz9/MhdkEi/OzObekieKX7MKrsIDrWCwEuW4kJKvi/v7YGjSyPVVgitRzCOa6MIBtyXwQvDLfk7IYauExHaQvL7m/QOO+0u6odFSQu9ba7YtKZuaJY+KEbOVGWhiFDw0UooEAx/GQf8nQzrZ8gH+P4q8u49qxXcm2Gnnjgq78ZhMGsmFEaoJvQC4MkfCvxapnb9L+eXeMdQNjfW+ijxJFKX2fQtfZfF4zBoHLA88OVVpvCul7deENGeZiZscUV5lDh50z/K3HQeiDcrD2/wQGK9lA8PBfvmHZd5tOzOCkF9YceXSRtMn65Y7iT9GFe3R/RSgut76pVnLwMpeWz3uiKmM+TNiUWlKrblJ86vyGcWLq/M1o66CzyXgAOse+rA57JeRlQFNJiUw== jenkins-agent-lab-key"
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

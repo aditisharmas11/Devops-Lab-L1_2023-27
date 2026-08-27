@@ -1,0 +1,8 @@
+services:
+  react-app:
+    build: .
+    image: devops-react-portfolio:latest
+    container_name: devops-react-app
+    ports:
+      - "3080:80"
+    restart: unless-stopped
