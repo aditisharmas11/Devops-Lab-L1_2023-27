@@ -1,0 +1,62 @@
+.page {
+  min-height: 100vh;
+  padding: 48px 24px 72px;
+  background:
+    radial-gradient(circle at top left, #1d4ed8 0%, transparent 32%),
+    radial-gradient(circle at top right, #0f766e 0%, transparent 28%),
+    #07111f;
+}
+
+.hero {
+  max-width: 860px;
+  margin: 0 auto 36px;
+}
+
+.kicker {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  font-size: 12px;
+}
+
+h1 {
+  margin: 8px 0 0;
+  font-size: clamp(36px, 6vw, 64px);
+}
+
+.prn {
+  margin: 8px 0 0;
+  color: #cbd5e1;
+}
+
+.lede {
+  max-width: 640px;
+  color: #dbeafe;
+  line-height: 1.6;
+}
+
+.grid {
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.5;
+}

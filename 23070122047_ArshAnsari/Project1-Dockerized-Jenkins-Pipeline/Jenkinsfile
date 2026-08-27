@@ -1,0 +1,63 @@
+pipeline {
+    agent { label 'built-in' }
+
+    environment {
+        IMAGE_NAME = 'hello-world-flask'
+        IMAGE_TAG  = "${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out source code from Git...'
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('23070122047_ArshAnsari/Project1-Dockerized-Jenkins-Pipeline') {
+                    sh 'python3 -m pip install --no-cache-dir -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('23070122047_ArshAnsari/Project1-Dockerized-Jenkins-Pipeline') {
+                    sh 'python3 -m py_compile app.py'
+                    sh '''
+                        python3 -c "from app import app; c = app.test_client(); r = c.get('/'); assert r.status_code == 200; assert b'Jenkins CI/CD Pipeline Working' in r.data; print('Flask route test passed')"
+                    '''
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('23070122047_ArshAnsari/Project1-Dockerized-Jenkins-Pipeline') {
+                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker rm -f hello-world-flask || true
+                    docker run -d --name hello-world-flask -p 5000:5000 hello-world-flask:latest
+                    docker ps --filter name=hello-world-flask
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline succeeded. Image ${IMAGE_NAME}:${IMAGE_TAG} is running on port 5000."
+        }
+        failure {
+            echo 'Pipeline failed. Open the failed stage console log in Jenkins.'
+        }
+    }
+}

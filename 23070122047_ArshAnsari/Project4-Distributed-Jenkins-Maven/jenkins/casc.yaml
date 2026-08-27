@@ -1,0 +1,66 @@
+jenkins:
+  systemMessage: "DevOps Lab L1 | Arsh Ansari | PRN 23070122047"
+  numExecutors: 2
+  mode: NORMAL
+  scmCheckoutRetryCount: 2
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin123"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  nodes:
+    - permanent:
+        name: "slave-1"
+        nodeDescription: "Maven compile and package node"
+        labelString: "slave-1 maven-build"
+        remoteFS: "/home/jenkins/agent"
+        numExecutors: 2
+        retentionStrategy: "always"
+        launcher:
+          ssh:
+            host: "slave-1"
+            port: 22
+            credentialsId: "agent-ssh-key"
+            launchTimeoutSeconds: 60
+            maxNumRetries: 30
+            retryWaitTime: 10
+            sshHostKeyVerificationStrategy:
+              nonVerifyingKeyVerificationStrategy: {}
+    - permanent:
+        name: "slave-2"
+        nodeDescription: "Maven test node"
+        labelString: "slave-2 maven-test"
+        remoteFS: "/home/jenkins/agent"
+        numExecutors: 2
+        retentionStrategy: "always"
+        launcher:
+          ssh:
+            host: "slave-2"
+            port: 22
+            credentialsId: "agent-ssh-key"
+            launchTimeoutSeconds: 60
+            maxNumRetries: 30
+            retryWaitTime: 10
+            sshHostKeyVerificationStrategy:
+              nonVerifyingKeyVerificationStrategy: {}
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              scope: SYSTEM
+              id: "agent-ssh-key"
+              username: "jenkins"
+              description: "Lab SSH key for Jenkins slave nodes"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${readFile:/run/secrets/agent_ssh_key}"
+
+unclassified:
+  location:
+    url: "http://localhost:8080/"
