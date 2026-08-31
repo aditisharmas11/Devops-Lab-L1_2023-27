@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  retailhub-app:
+    build: .
+    container_name: retailhub-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - retail-network
+
+  nginx-gateway:
+    image: nginx:alpine
+    container_name: retail-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - retailhub-app
+    networks:
+      - retail-network
+
+networks:
+  retail-network:
+    driver: bridge
