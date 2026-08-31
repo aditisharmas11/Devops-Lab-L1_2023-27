@@ -1,0 +1,15 @@
+<main class="page">
+  <header>
+    <p class="badge">Angular CLI + Docker Compose</p>
+    <h1>{{ title }}</h1>
+    <p>{{ student }} · PRN {{ prn }}</p>
+  </header>
+  <section class="grid">
+    @for (item of products; track item.name) {
+      <article class="card">
+        <h2>{{ item.name }}</h2>
+        <p>₹{{ item.price }}</p>
+      </article>
+    }
+  </section>
+</main>

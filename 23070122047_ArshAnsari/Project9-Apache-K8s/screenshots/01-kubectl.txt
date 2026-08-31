@@ -1,0 +1,21 @@
+﻿NAME                                    READY   STATUS    RESTARTS   AGE
+pod/apache2-59bfb68c-lgcm8              1/1     Running   0          7m45s
+pod/apache2-59bfb68c-qw5xn              1/1     Running   0          7m45s
+pod/frontend-gateway-7c5c4d7fc7-w85hc   1/1     Running   0          7m45s
+pod/mongo-7dbcc49c84-pb52p              1/1     Running   0          7m50s
+pod/mongo-express-5cd8d74df6-n24ss      1/1     Running   0          7m47s
+pod/order-service-66f95966d-xd8tb       1/1     Running   0          7m45s
+pod/product-service-5bf4d8b9d9-ml29b    1/1     Running   0          7m50s
+pod/social-feed-8666789bc9-4b6s4        1/1     Running   0          7m50s
+pod/user-service-7485dd8ddc-f7r4l       1/1     Running   0          7m50s
+
+NAME                            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/apache2                 NodePort    10.96.133.187   <none>        80:30083/TCP     7m48s
+service/frontend-gateway        NodePort    10.96.49.251    <none>        8080:30082/TCP   7m51s
+service/kubernetes              ClusterIP   10.96.0.1       <none>        443/TCP          14m
+service/mongo-express-service   NodePort    10.96.175.124   <none>        8081:30081/TCP   8m4s
+service/mongo-service           ClusterIP   10.96.28.222    <none>        27017/TCP        8m5s
+service/order-service           ClusterIP   10.96.158.97    <none>        8080/TCP         8m2s
+service/product-service         ClusterIP   10.96.92.49     <none>        8080/TCP         8m2s
+service/social-feed             NodePort    10.96.180.227   <none>        8080:30080/TCP   8m8s
+service/user-service            ClusterIP   10.96.105.206   <none>        8080/TCP         8m3s

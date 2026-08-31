@@ -1,0 +1,167 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: store-config
+data:
+  USER_URL: http://user-service:8080
+  PRODUCT_URL: http://product-service:8080
+  ORDER_URL: http://order-service:8080
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: store-secret
+type: Opaque
+stringData:
+  API_KEY: lab-store-key-23070122047
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user
+          image: store-service:1.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SERVICE_NAME
+              value: user-service
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: store-secret
+                  key: API_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product
+          image: store-service:1.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SERVICE_NAME
+              value: product-service
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: store-secret
+                  key: API_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product-service
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order
+          image: store-service:1.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SERVICE_NAME
+              value: order-service
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: store-secret
+                  key: API_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order-service
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-gateway
+  template:
+    metadata:
+      labels:
+        app: frontend-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: store-gateway:1.0.0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: store-config
+            - secretRef:
+                name: store-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-gateway
+spec:
+  type: NodePort
+  selector:
+    app: frontend-gateway
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30082

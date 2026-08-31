@@ -1,0 +1,39 @@
+﻿<!doctype html><html><head><meta charset='utf-8'><title>TW1.3 Jenkins Freestyle SUCCESS</title>
+<style>body{margin:0;background:#111;color:#d1d5db;font-family:Consolas,monospace}
+.bar{background:#166534;color:#fff;padding:14px 24px;font-family:Segoe UI,sans-serif}
+pre{padding:24px;white-space:pre-wrap;font-size:14px;line-height:1.45}</style></head>
+<body><div class='bar'><h1 style='margin:0;font-size:18px'>TW1.3-Freestyle-HelloWorld #1 — Finished: SUCCESS</h1>
+<p style='margin:6px 0 0'>Git: hello-world-flask.git main | Build step: ls -la</p></div>
+<pre>Started from command line by ha:////4NKsPWek/u5zlRTT37MS+iBkbNNQPrT1FCNOCw5NxjshAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=admin
+Running as SYSTEM
+Building remotely on ha:////4MKxa5P+ipSQ/5h5XbAZ9oJrC1x7ZDrFLwulfriG172TAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAx2oBn6yfm5BaUlqUX6xTmJZam6RvoAQFqZMscAAAA=slave-2 (maven-test) in workspace /home/jenkins/agent/workspace/TW1.3-Freestyle-HelloWorld
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/arshansari2880-alt/hello-world-flask.git
+ > git init /home/jenkins/agent/workspace/TW1.3-Freestyle-HelloWorld # timeout=10
+Fetching upstream changes from https://github.com/arshansari2880-alt/hello-world-flask.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/arshansari2880-alt/hello-world-flask.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/arshansari2880-alt/hello-world-flask.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 7ff7fc2624806e8e33fd788b727a972c7b5043a8 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 7ff7fc2624806e8e33fd788b727a972c7b5043a8 # timeout=10
+Commit message: "Resolve merge conflict between main and feature/user-auth."
+First time build. Skipping changelog.
+[TW1.3-Freestyle-HelloWorld] $ /bin/sh -xe /tmp/jenkins980444579159606054.sh
++ ls -la
+total 20
+drwxrwxr-x 3 jenkins jenkins 4096 Aug 27 13:55 .
+drwxrwxr-x 3 jenkins jenkins 4096 Aug 27 13:55 ..
+drwxrwxr-x 8 jenkins jenkins 4096 Aug 27 13:55 .git
+-rw-rw-r-- 1 jenkins jenkins  260 Aug 27 13:55 app.py
+-rw-rw-r-- 1 jenkins jenkins   13 Aug 27 13:55 requirements.txt
++ echo Workspace listing complete
+Workspace listing complete
+Finished: SUCCESS
+</pre></body></html>

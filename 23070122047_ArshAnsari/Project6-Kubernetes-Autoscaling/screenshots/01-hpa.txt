@@ -1,0 +1,31 @@
+﻿NAME                                    READY   STATUS    RESTARTS   AGE     IP            NODE                       NOMINATED NODE   READINESS GATES
+pod/apache2-59bfb68c-lgcm8              1/1     Running   0          7m42s   10.244.0.12   devops-lab-control-plane   <none>           <none>
+pod/apache2-59bfb68c-qw5xn              1/1     Running   0          7m42s   10.244.0.13   devops-lab-control-plane   <none>           <none>
+pod/frontend-gateway-7c5c4d7fc7-w85hc   1/1     Running   0          7m42s   10.244.0.10   devops-lab-control-plane   <none>           <none>
+pod/mongo-7dbcc49c84-pb52p              1/1     Running   0          7m47s   10.244.0.6    devops-lab-control-plane   <none>           <none>
+pod/mongo-express-5cd8d74df6-n24ss      1/1     Running   0          7m44s   10.244.0.11   devops-lab-control-plane   <none>           <none>
+pod/order-service-66f95966d-xd8tb       1/1     Running   0          7m42s   10.244.0.14   devops-lab-control-plane   <none>           <none>
+pod/product-service-5bf4d8b9d9-ml29b    1/1     Running   0          7m47s   10.244.0.9    devops-lab-control-plane   <none>           <none>
+pod/social-feed-8666789bc9-4b6s4        1/1     Running   0          7m47s   10.244.0.5    devops-lab-control-plane   <none>           <none>
+pod/user-service-7485dd8ddc-f7r4l       1/1     Running   0          7m47s   10.244.0.8    devops-lab-control-plane   <none>           <none>
+
+NAME                            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
+service/apache2                 NodePort    10.96.133.187   <none>        80:30083/TCP     7m45s   app=apache2
+service/frontend-gateway        NodePort    10.96.49.251    <none>        8080:30082/TCP   7m48s   app=frontend-gateway
+service/kubernetes              ClusterIP   10.96.0.1       <none>        443/TCP          14m     <none>
+service/mongo-express-service   NodePort    10.96.175.124   <none>        8081:30081/TCP   8m1s    app=mongo-express
+service/mongo-service           ClusterIP   10.96.28.222    <none>        27017/TCP        8m2s    app=mongo
+service/order-service           ClusterIP   10.96.158.97    <none>        8080/TCP         7m59s   app=order-service
+service/product-service         ClusterIP   10.96.92.49     <none>        8080/TCP         7m59s   app=product-service
+service/social-feed             NodePort    10.96.180.227   <none>        8080:30080/TCP   8m5s    app=social-feed
+service/user-service            ClusterIP   10.96.105.206   <none>        8080/TCP         8m      app=user-service
+
+NAME                                              REFERENCE                TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/social-feed   Deployment/social-feed   cpu: 1%/50%   1         6         1          8m4s
+NAME          REFERENCE                TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+social-feed   Deployment/social-feed   cpu: 82%/50%   1         6         4          13m
+NAME                           READY   STATUS    RESTARTS   AGE
+social-feed-8666789bc9-4b6s4   1/1     Running   0          13m
+social-feed-8666789bc9-g7bvx   1/1     Running   0          4m6s
+social-feed-8666789bc9-w9m6g   1/1     Running   0          4m6s
+social-feed-8666789bc9-x52qc   1/1     Running   0          4m6s

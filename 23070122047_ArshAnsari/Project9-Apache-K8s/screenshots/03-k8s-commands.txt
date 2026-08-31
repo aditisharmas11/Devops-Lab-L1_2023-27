@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html>
+  <head><title>Apache2 on Kubernetes</title></head>
+  <body>
+    <h1>Apache2 running in a Kubernetes Deployment</h1>
+    <p>PRN 23070122047 - Arsh Ansari</p>
+  </body>
+</html>
+kubectl : error: --rm should only be used for attached containers
+At C:\Users\91940\AppData\Local\Temp\ps-script-c7951671-0ca7-432c-9523-88caee718cdf.ps1:118 char:1
++ kubectl run curl-test --rm --image=busybox:1.36 --restart=Never -- wg ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (error: --rm sho...ched containers:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+See 'kubectl run -h' for help and examples
+apache2-59bfb68c-lgcm8
+# Host access via kubectl port-forward
+kubectl port-forward svc/apache2 18080:80
+curl http://localhost:18080
+
+Response:
+<!doctype html>
+<html>
+  <head><title>Apache2 on Kubernetes</title></head>
+  <body>
+    <h1>Apache2 running in a Kubernetes Deployment</h1>
+    <p>PRN 23070122047 - Arsh Ansari</p>
+  </body>
+</html>
+
+# Also via NodePort 30083 from the host:
+curl http://localhost:30083
+# kubectl exec deploy/apache2 -- cat /usr/local/apache2/htdocs/index.html
+<!doctype html>
+<html>
+  <head><title>Apache2 on Kubernetes</title></head>
+  <body>
+    <h1>Apache2 running in a Kubernetes Deployment</h1>
+    <p>PRN 23070122047 - Arsh Ansari</p>
+  </body>
+</html>

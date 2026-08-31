@@ -1,0 +1,1 @@
+﻿{"message":"Retail store API running in Docker","prn":"23070122047","company":"Arsh Retail Labs"}

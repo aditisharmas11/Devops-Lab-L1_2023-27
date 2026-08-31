@@ -1,0 +1,8 @@
+﻿<!doctype html>
+<html>
+  <head><title>Apache2 on Kubernetes</title></head>
+  <body>
+    <h1>Apache2 running in a Kubernetes Deployment</h1>
+    <p>PRN 23070122047 - Arsh Ansari</p>
+  </body>
+</html>

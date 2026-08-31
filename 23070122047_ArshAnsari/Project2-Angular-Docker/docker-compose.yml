@@ -1,0 +1,9 @@
+services:
+  angular-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: retail-store-angular:prod
+    container_name: angular-prod
+    ports:
+      - "4201:80"

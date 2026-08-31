@@ -1,0 +1,13 @@
+﻿HPA scaled social-feed under load (kind cluster devops-lab)
+
+Before load:
+  cpu: 19%/50%   REPLICAS 1
+
+During load:
+  cpu: 82%/50%   REPLICAS 4
+
+Pods:
+social-feed-8666789bc9-4b6s4   1/1     Running
+social-feed-8666789bc9-g7bvx   1/1     Running
+social-feed-8666789bc9-w9m6g   1/1     Running
+social-feed-8666789bc9-x52qc   1/1     Running

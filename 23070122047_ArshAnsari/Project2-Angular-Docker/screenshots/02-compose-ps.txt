@@ -1,0 +1,3 @@
+﻿NAME           IMAGE                       COMMAND                  SERVICE        STATUS      PORTS
+angular-dev    retail-store-angular:dev    npm start                angular-dev    Up          0.0.0.0:4200->4200/tcp
+angular-prod   retail-store-angular:prod   nginx                    angular-prod   Up          0.0.0.0:4201->80/tcp

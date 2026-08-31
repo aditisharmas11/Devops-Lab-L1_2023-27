@@ -1,0 +1,5 @@
+﻿* develop
+  feature/login
+  hotfix/critical-bug
+  main
+  release/1.0

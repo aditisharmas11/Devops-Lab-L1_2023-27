@@ -1,0 +1,7 @@
+services:
+  retail-api:
+    build: .
+    image: retail-store:1.0.0
+    container_name: retail-store
+    ports:
+      - "8091:8080"

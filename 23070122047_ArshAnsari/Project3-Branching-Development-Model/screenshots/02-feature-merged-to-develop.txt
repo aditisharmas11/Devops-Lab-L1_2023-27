@@ -1,0 +1,8 @@
+﻿60c4926 (HEAD -> develop) Merge hotfix/critical-bug into develop.
+445ecf8 (hotfix/critical-bug) Hotfix: return explicit critical-bug-fixed flag.
+a4d5c5e Merge release/1.0 back into develop.
+f4b1080 (tag: v1.0.0) Merge release/1.0 into main.
+382630b Merge feature/login into develop.
+13bde80 (release/1.0) Bump version to 1.0.0 on release/1.0.
+bf49a4d Initial commit: branching demo app on main.
+8fa8cae Start develop integration branch.

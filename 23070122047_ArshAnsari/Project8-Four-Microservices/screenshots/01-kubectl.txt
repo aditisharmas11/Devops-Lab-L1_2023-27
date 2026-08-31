@@ -1,0 +1,30 @@
+﻿NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/apache2            2/2     2            2           7m49s
+deployment.apps/frontend-gateway   1/1     1            1           7m59s
+deployment.apps/mongo              1/1     1            1           8m4s
+deployment.apps/mongo-express      1/1     1            1           8m4s
+deployment.apps/order-service      1/1     1            1           8m1s
+deployment.apps/product-service    1/1     1            1           8m1s
+deployment.apps/social-feed        1/1     1            1           8m8s
+deployment.apps/user-service       1/1     1            1           8m2s
+
+NAME                            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/apache2                 NodePort    10.96.133.187   <none>        80:30083/TCP     7m47s
+service/frontend-gateway        NodePort    10.96.49.251    <none>        8080:30082/TCP   7m50s
+service/kubernetes              ClusterIP   10.96.0.1       <none>        443/TCP          14m
+service/mongo-express-service   NodePort    10.96.175.124   <none>        8081:30081/TCP   8m3s
+service/mongo-service           ClusterIP   10.96.28.222    <none>        27017/TCP        8m4s
+service/order-service           ClusterIP   10.96.158.97    <none>        8080/TCP         8m1s
+service/product-service         ClusterIP   10.96.92.49     <none>        8080/TCP         8m1s
+service/social-feed             NodePort    10.96.180.227   <none>        8080:30080/TCP   8m7s
+service/user-service            ClusterIP   10.96.105.206   <none>        8080/TCP         8m2s
+
+NAME                         DATA   AGE
+configmap/apache2-html       1      7m49s
+configmap/kube-root-ca.crt   1      14m
+configmap/mongo-config       2      8m4s
+configmap/store-config       3      8m2s
+
+NAME                  TYPE     DATA   AGE
+secret/mongo-secret   Opaque   2      8m4s
+secret/store-secret   Opaque   1      8m2s
