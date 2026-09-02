@@ -2,41 +2,38 @@ pipeline {
     agent none
 
     stages {
-
         stage('Compile') {
-            agent {
-                label 'compile'
-            }
+            agent { label 'agent1' }
             steps {
-                dir('C:/Users/Dell/Desktop/jenkins-maven-demo') {
-                    bat 'mvn clean compile'
-                }
+                echo 'Checking out source code on agent 1...'
+                checkout scm
+                
+                echo 'Compiling Maven project on agent 1...'
+                bat 'mvn clean compile'
             }
         }
 
         stage('Test') {
-            agent {
-                label 'test'
-            }
+            agent { label 'agent2' }
             steps {
-                dir('C:/Users/Dell/Desktop/jenkins-maven-demo') {
-                    bat 'mvn test'
-                }
+                echo 'Checking out source code on agent 2...'
+                checkout scm
+                
+                echo 'Testing Maven project on agent 2...'
+                bat 'mvn test'
             }
         }
     }
 
     post {
         always {
-            echo 'Pipeline completed.'
+            echo 'Pipeline execution finished.'
         }
-
         success {
-            echo 'Build Successful!'
+            echo 'Build and Test successful across distributed nodes!'
         }
-
         failure {
-            echo 'Build Failed!'
+            echo 'Pipeline failed.'
         }
     }
 }
