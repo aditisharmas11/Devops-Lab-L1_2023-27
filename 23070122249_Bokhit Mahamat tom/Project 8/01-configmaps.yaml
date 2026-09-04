@@ -1,0 +1,73 @@
+# -----------------------------------------------------------------------------
+# ConfigMap 1: Shared, non-sensitive settings consumed by every microservice.
+# Mounted as environment variables via `envFrom` in each Deployment.
+# -----------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: shopease
+  labels:
+    app: shopease
+data:
+  NODE_ENV: "production"
+  LOG_LEVEL: "info"
+  # Internal DNS names — Kubernetes Services provide stable hostnames within
+  # the namespace, so services talk to each other by Service name, not IP.
+  USER_SERVICE_URL: "http://user-service:3001"
+  PRODUCT_SERVICE_URL: "http://product-service:3002"
+  ORDER_SERVICE_URL: "http://order-service:3003"
+  POSTGRES_HOST: "postgres"
+  POSTGRES_PORT: "5432"
+  CORS_ALLOWED_ORIGINS: "*"
+---
+# -----------------------------------------------------------------------------
+# ConfigMap 2: Frontend runtime config (e.g. injected into an nginx-served SPA
+# via a small config.js, or used to template nginx.conf).
+# -----------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: shopease
+  labels:
+    app: frontend
+data:
+  API_BASE_URL: "/api"
+  nginx.conf: |
+    server {
+        listen 80;
+        server_name _;
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location /api/users/ {
+            proxy_pass http://user-service:3001/;
+        }
+        location /api/products/ {
+            proxy_pass http://product-service:3002/;
+        }
+        location /api/orders/ {
+            proxy_pass http://order-service:3003/;
+        }
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }
+---
+# -----------------------------------------------------------------------------
+# ConfigMap 3: SQL run once by the Postgres init hook to create per-service
+# databases (keeps each microservice's data isolated, single DB instance).
+# -----------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-config
+  namespace: shopease
+  labels:
+    app: postgres
+data:
+  init.sql: |
+    CREATE DATABASE users_db;
+    CREATE DATABASE products_db;
+    CREATE DATABASE orders_db;

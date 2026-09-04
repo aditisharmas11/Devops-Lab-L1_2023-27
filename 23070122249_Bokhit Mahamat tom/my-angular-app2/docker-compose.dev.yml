@@ -1,0 +1,17 @@
+services:
+  angular-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: my-angular-app:dev
+    container_name: my-angular-app-dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NG_CLI_ANALYTICS=false
+    stdin_open: true
+    tty: true

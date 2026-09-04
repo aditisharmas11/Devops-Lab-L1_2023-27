@@ -1,0 +1,46 @@
+pipeline {
+    agent none
+
+    tools {
+        maven 'Maven-3.9'
+        jdk   'JDK-17'
+    }
+
+    stages {
+        stage('Checkout') {
+            agent { label 'build' }
+            steps {
+                checkout scm
+                stash includes: '**', name: 'source-code'
+            }
+        }
+
+        stage('Compile') {
+            agent { label 'build' }
+            steps {
+                unstash 'source-code'
+                sh 'mvn -B clean compile'
+                stash includes: 'target/**', name: 'compiled-classes'
+            }
+        }
+
+        stage('Test') {
+            agent { label 'test' }
+            steps {
+                unstash 'source-code'
+                unstash 'compiled-classes'
+                sh 'mvn -B test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+
+    post {
+        success { echo 'Pipeline terminé avec succès sur les deux nodes distribués.' }
+        failure { echo 'Le pipeline a échoué — vérifie les logs des stages.' }
+    }
+}
