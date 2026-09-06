@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t project1-dockerizing-jenkins .\\Project1_Dockerizing_Jenkins\\source'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                bat 'docker rm -f project1-jenkins-container 2>nul || exit /b 0'
+                bat 'docker run -d --name project1-jenkins-container -p 5002:5000 project1-dockerizing-jenkins'
+            }
+        }
+
+        stage('Verify Container') {
+            steps {
+                bat 'docker ps'
+                bat 'curl -f http://localhost:5002'
+            }
+        }
+    }
+
+    post {
+        always {
+            bat 'docker rm -f project1-jenkins-container 2>nul || exit /b 0'
+        }
+    }
+}
