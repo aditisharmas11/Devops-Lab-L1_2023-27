@@ -1,0 +1,17 @@
+
+services:
+  angular-dev:
+    build:
+      context: ./angular-docker-app
+      dockerfile: Dockerfile.dev
+    container_name: angular_dev_container
+    ports:
+      - "4200:4200"
+
+  angular-prod:
+    build:
+      context: ./angular-docker-app
+      dockerfile: Dockerfile
+    container_name: angular_prod_container
+    ports:
+      - "8080:80"
