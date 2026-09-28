@@ -1,0 +1,38 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: social-media-api
+  labels:
+    app: social-media-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: social-media-api
+  template:
+    metadata:
+      labels:
+        app: social-media-api
+    spec:
+      containers:
+      - name: social-feed-service
+        image: registry.k8s.io/hpa-example
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: social-media-service
+spec:
+  type: ClusterIP
+  selector:
+    app: social-media-api
+  ports:
+  - port: 80
+    targetPort: 80

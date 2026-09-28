@@ -1,0 +1,2 @@
+﻿# Security patch applied to v1.1.0
+Resolved token expiration bug.

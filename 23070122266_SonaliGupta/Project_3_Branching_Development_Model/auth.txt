@@ -1,0 +1,2 @@
+﻿# Core Application - v1.1.0-dev
+Feature: User Authentication Module added.

@@ -1,0 +1,33 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('Checkout & Compile') {
+            agent {
+                label 'maven-compile'
+            }
+            steps {
+                echo '=== Running on Slave 1: maven-build-node ==='
+                git branch: 'master', url: 'https://github.com/liturg/spring-petclinic.git'
+                sh 'mvn compile -DskipTests'
+                stash name: 'compiled-app', includes: '**/*'
+            }
+        }
+
+        stage('Run Unit & Integration Tests') {
+            agent {
+                label 'maven-test'
+            }
+            steps {
+                echo '=== Running on Slave 2: maven-test-node ==='
+                unstash 'compiled-app'
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit allowEmptyResults: true, testResults: '**/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}

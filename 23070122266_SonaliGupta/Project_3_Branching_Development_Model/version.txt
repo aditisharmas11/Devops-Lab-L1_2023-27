@@ -1,0 +1,2 @@
+﻿# Core Application - v1.1.0
+Production release candidate 1.1.0 with Auth module.
