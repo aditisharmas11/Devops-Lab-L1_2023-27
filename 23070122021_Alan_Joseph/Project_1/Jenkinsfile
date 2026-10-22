@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "lab1-python-app"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install') {
+            steps {
+                dir('Project_1/app') {
+                    sh 'python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('Project_1/app') {
+                    sh '. venv/bin/activate && pytest -v'
+                }
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                dir('Project_1/app') {
+                    sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -t ${IMAGE_NAME}:latest ."
+                }
+            }
+        }
+
+        stage('Deliver') {
+            steps {
+                sh "docker run --rm ${IMAGE_NAME}:latest"
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

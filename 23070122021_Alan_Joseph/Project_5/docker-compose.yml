@@ -1,0 +1,8 @@
+services:
+  retail-app:
+    build: .
+    image: retail-app:1.0
+    container_name: retail-app
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

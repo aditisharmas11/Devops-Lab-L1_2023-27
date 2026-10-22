@@ -1,0 +1,2 @@
+Feature: greeting function
+Adds greet(name) to app.py, used by the login flow.

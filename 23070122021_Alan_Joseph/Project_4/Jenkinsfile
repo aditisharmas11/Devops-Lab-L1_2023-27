@@ -1,0 +1,21 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('Compile on slave1') {
+            agent { label 'slave1' }
+            steps {
+                checkout scm
+                sh 'mvn -B clean compile'
+            }
+        }
+
+        stage('Test on slave2') {
+            agent { label 'slave2' }
+            steps {
+                checkout scm
+                sh 'mvn -B test'
+            }
+        }
+    }
+}
